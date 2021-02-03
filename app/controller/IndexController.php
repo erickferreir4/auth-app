@@ -2,13 +2,18 @@
 
 namespace app\controller;
 
+use app\traits\TemplateTrait;
+
 /**
  *  Index Controller
  */
 class IndexController
 {
+    use TemplateTrait;
+
     public function __construct()
     {
-        echo 1;
+        $this->setTitle('Home');
+        $this->layout('index');
     }
 }
