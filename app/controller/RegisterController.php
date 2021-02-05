@@ -6,24 +6,22 @@ use app\traits\TemplateTrait;
 use app\lib\Assets;
 
 /**
- *  Index Controller
+ *  Regsiter Controller
  */
-class IndexController
+class RegisterController
 {
     use TemplateTrait;
 
-    public function __construct()
-    {
+    public function __construct() {
+
         $this->addAssets();
-        $this->setTitle('Home');
-        $this->layout('index');
+        $this->setTitle('Register');
+        $this->layout('register');
     }
 
     public function addAssets()
     {
         $this->setAssets( new Assets );
-        $this->addStyle('index');
-        $this->addScript('index');
-
+        $this->addStyle('register');
     }
 }

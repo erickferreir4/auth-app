@@ -6,24 +6,22 @@ use app\traits\TemplateTrait;
 use app\lib\Assets;
 
 /**
- *  Index Controller
+ *  Login Controller
  */
-class IndexController
+class LoginController
 {
     use TemplateTrait;
 
     public function __construct()
     {
         $this->addAssets();
-        $this->setTitle('Home');
-        $this->layout('index');
+        $this->setTitle('Login');
+        $this->layout('Login');
     }
 
     public function addAssets()
     {
         $this->setAssets( new Assets );
-        $this->addStyle('index');
-        $this->addScript('index');
-
+        $this->addStyle('login');
     }
 }

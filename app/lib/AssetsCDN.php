@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace app\lib;
+
 use app\interfaces\IAssets;
 
 /**

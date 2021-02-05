@@ -4,6 +4,7 @@ namespace app\traits;
 
 use app\interfaces\IAssets;
 use app\lib\Assets;
+use app\lib\AssetsCDN;
 
 /**
  *  Template Trait
@@ -78,5 +79,8 @@ trait TemplateTrait
         $this->addStyle('reset');
         $this->addStyle('general');
         $this->addScript('general');
+
+        $this->setAssets( new AssetsCDN );
+        $this->addStyle('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
     }
 }
