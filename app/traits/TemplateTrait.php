@@ -76,8 +76,8 @@ trait TemplateTrait
     {
         $this->setAssets( new Assets );
 
-        $this->addStyle('reset');
         $this->addStyle('general');
+        $this->addStyle('reset');
         $this->addScript('general');
 
         $this->setAssets( new AssetsCDN );

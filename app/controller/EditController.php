@@ -7,9 +7,9 @@ use app\lib\Assets;
 use app\traits\AccountTop;
 
 /**
- *  Index Controller
+ * Edit Controller;
  */
-class IndexController
+class EditController
 {
     use TemplateTrait;
     use AccountTop;
@@ -17,21 +17,13 @@ class IndexController
     public function __construct()
     {
         $this->addAssets();
-        $this->setTitle('Home');
-        $this->layout('index');
+        $this->setTitle('Edit');
+        $this->layout('edit');
     }
-
     public function addAssets()
     {
         $this->setAssets( new Assets );
-        $this->addStyle('index');
-        $this->addScript('index');
-    }
-
-    public function personalInfo()
-    {
-        $info = file_get_contents(__DIR__ . '/../templates/personal_info.html');
-
-        return $info;
+        $this->addStyle('edit');
+        $this->addScript('edit');
     }
 }

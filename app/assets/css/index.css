@@ -1,88 +1,90 @@
-main {
-    padding: 30px 70px;
+.user--center {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
-.top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.user--info > h2{
+    text-align: center;
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 10px;
 }
-
-.account {
-    display: flex;
-    align-items: center;
-    position:relative;
+.user--info > h4{
+    text-align: center;
+    font-weight: 400;
 }
-.account > span {
-    width: 40px;
-}
-.account > span img{
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.account > button {
-    display: flex;
-    align-items: center;
-}
-
-.account > button p{
-    margin-right: 20px;
-    margin-left: 10px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #333333;
-}
-
-.account > button i img{
-    width: 10px
-}
-
-.account-drop {
+.user--info > ul{
     border: 1px solid #E0E0E0;
     border-radius: 12px;
-    padding: 15px;
-    width: 160px;
-    position: absolute;
-    top: 55px;
-    background: white;
-    right: 0;
-
-    height: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: .2;
+    margin-top: 44px;
 }
-.account-drop.is--active {
-    height: auto;
-    opacity: 1;
-    visibility: visible;
-}
-
-.account-drop img{
-    width: 20px;
-}
-.account-drop p{
-    font-size: 12px;
-    color: #4F4F4F;
-    margin-left: 10px;
-
-}
-.account-drop button, a{
+.user--info > ul li{
+    border-bottom: 1px solid #D3D3D3;
+    padding: 30px 50px;
     display: flex;
     align-items: center;
-    padding: 8px 13px;
 }
-.account-drop button{
-    width: 100%;
-    background-color: #F2F2F2;
+.user--info > ul li:first-of-type{
+    justify-content: space-between;
+}
+.user--info > ul li:last-of-type{
+    border-bottom: none;
+}
+.user--info > ul li h3{
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.user--info > ul li a{
+    border: 1px solid #828282;
+    border-radius: 12px;
+    width: 95px;
+    height: 38px;
+    font-size: 16px;
+    color: #828282;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user--info > ul li p{
+    width: 40%;
+    font-size: 13px;
+    color: #BDBDBD;
+    display: flex;
+    align-items: center;
+}
+.user--info > ul li strong{
+    color: #333333;
+    font-size: 18px;
+}
+.user--info > ul li img{
+    width: 72px;
     border-radius: 8px;
 }
-.account-drop a:last-of-type{
-    border-top: 1px solid #E0E0E0;
-    margin-top: 23px;
-    padding: 24px 13px 8px;
+.user--info > ul li:first-of-type p{
     width: auto;
+    color: #828282;
 }
 
+@media (max-width: 768px ) {
+    .user--center {
+        width:100%;
+    }
+    .user--info > h2 {
+        margin-top: 25px;
+        font-size: 24px;
+    }
+
+    .user--info > h4 {
+        font-size: 14px;
+    }
+
+    .user--info ul {
+        border: none;
+    }
+    .user--info ul li{
+        padding: 30px 0;
+        justify-content: space-between;
+    }
+
+}
