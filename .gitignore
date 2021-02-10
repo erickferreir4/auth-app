@@ -1,5 +1,5 @@
 *.DS_Store
-/app/database/database
+/app/database/db
 /app/database/*.db
 /app/tmp/log.*
 /app/tmp/log.*

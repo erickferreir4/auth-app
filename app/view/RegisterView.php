@@ -5,9 +5,10 @@
 
             <h3>Master web development by making real-life projects. There are multiple paths for you to choose</h3>
     
-            <form>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+            <form action="/register" method="POST">
+                <input type="email" placeholder="Email" name="email"/>
+                <input type="password" placeholder="Password" name="passwd"/>
+                <input type="password" placeholder="Confirm Password" name="conf-passwd"/>
     
                 <button type="submit">Start coding now</button>
             </form>
