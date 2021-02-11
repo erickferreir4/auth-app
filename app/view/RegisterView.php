@@ -5,6 +5,7 @@
 
             <h3>Master web development by making real-life projects. There are multiple paths for you to choose</h3>
     
+            <p class="<?= $this->userExists ? 'is--active' : ''?>">user exists</p>
             <form action="/register" method="POST">
                 <input type="email" placeholder="Email" name="email"/>
                 <input type="password" placeholder="Password" name="passwd"/>
