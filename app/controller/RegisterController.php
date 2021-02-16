@@ -20,22 +20,34 @@ class RegisterController
     private static $model;
     private $userExists;
 
-    public function __construct() {
-
+    public function __construct() 
+    {
         $this->hasPost();
         $this->addAssets();
         $this->setTitle('Register');
         $this->layout('register');
     }
 
-    public function addAssets()
+    /**
+     *  Add Assets to page
+     */
+    public function addAssets() : void
     {
         $this->setAssets( new Assets );
         $this->addStyle('register');
+        $this->addScript('register');
     }
 
-    public function hasPost()
+    /**
+     *  Verify post data
+     */
+    public function hasPost() : void
     {
+        session_start();
+        if( isset($_SESSION['user']) ) {
+            header('location: /');
+        }
+
         $data = new stdClass;
 
         $data->email = isset($_POST['email']) ? 
@@ -44,19 +56,22 @@ class RegisterController
         $data->passwd = isset($_POST['passwd']) ? 
                     filter_var($_POST['passwd'], FILTER_SANITIZE_SPECIAL_CHARS) : null;
 
-
         if( $data->email && $data->passwd ) {
             if( $this->authUser($data) ) {
-                session_start();
                 $_SESSION['user'] = $data->email;
                 header('location: /');
             }
         }
+
         $_POST = [];
-        return false;
+        session_destroy();
     }
 
-    private function authUser($data) : bool
+    /**
+     *  Authenticate user
+     *  @param {object} $data - data user 
+     */
+    private function authUser(stdClass $data) : bool
     {
         try {
             Transaction::open('database');
@@ -85,11 +100,19 @@ class RegisterController
         
     }
 
+    /**
+     *  User exists
+     *  @param {string} $email - user email
+     */
     private function userNotExists(string $email) : bool
     {
         return empty(self::$model->find($email));
     }
 
+    /**
+     *  Save user
+     *  @param {stdClass} $data - user data
+     */
     private function saveUser( stdClass $data ) : bool
     {
         return self::$model->save($data);

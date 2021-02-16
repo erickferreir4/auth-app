@@ -47,6 +47,7 @@ form button {
     padding: 11px;
     margin-top: 7px;
     margin-bottom: 32px;
+
 }
 
 .register--center p {
@@ -69,6 +70,13 @@ form button {
     margin: 0 15px;
 }
 
+.register--center > p {
+    display: none;
+    color: red;
+}
+.register--center > p.is--active {
+    display:block;
+}
 
 @media (max-width: 768px ) {
     .register--center {

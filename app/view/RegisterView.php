@@ -6,7 +6,7 @@
             <h3>Master web development by making real-life projects. There are multiple paths for you to choose</h3>
     
             <p class="<?= $this->userExists ? 'is--active' : ''?>">user exists</p>
-            <form action="/register" method="POST">
+            <form action="/register" method="POST" onsubmit="return passwdConf();">
                 <input type="email" placeholder="Email" name="email"/>
                 <input type="password" placeholder="Password" name="passwd"/>
                 <input type="password" placeholder="Confirm Password" name="conf-passwd"/>

@@ -72,7 +72,7 @@ class RegisterModel
         $stmt = self::$conn->prepare($sql);
 
         $stmt->bindValue('email', $data->email);
-        $stmt->bindValue('passwd', $data->passwd);
+        $stmt->bindValue('passwd', password_hash($data->passwd, PASSWORD_DEFAULT));
 
         return $stmt->execute() ? true : false;
     }
