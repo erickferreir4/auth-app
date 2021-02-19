@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.3-apache
 
 # fallback index.php
 RUN echo '<Directory "/var/www/html/app">' >> /etc/apache2/apache2.conf
