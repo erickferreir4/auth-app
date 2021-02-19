@@ -19,6 +19,10 @@ class IndexController
         $this->addAssets();
         $this->setTitle('Home');
         $this->layout('index');
+
+        //session_start();
+        //var_dump($_SESSION['user']);
+
     }
 
     public function addAssets()

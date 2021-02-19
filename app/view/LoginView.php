@@ -3,9 +3,9 @@
         <div class="login--center">
             <h2>Login</h2>
     
-            <form>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+            <form action="/login" method="POST">
+                <input type="email" placeholder="Email" name="email" />
+                <input type="password" name="passwd" placeholder="Password" />
     
                 <button type="submit">Login</button>
             </form>

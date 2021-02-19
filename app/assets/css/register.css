@@ -40,6 +40,11 @@ form input {
     margin-bottom: 15px;
 }
 
+form input.is--error{
+    border: 1px solid red;
+}
+
+
 form button {
     background-color: #2F80ED;
     color: #fff;
@@ -70,7 +75,7 @@ form button {
     margin: 0 15px;
 }
 
-.register--center > p {
+.register--center > p:first-of-type {
     display: none;
     color: red;
 }

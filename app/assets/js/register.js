@@ -11,10 +11,7 @@ const passwdConf = () =>
     }
     else {
         conf.classList.remove('is--error')
-        alert();
-        return false
+        return true
     }
-
-
 }
 

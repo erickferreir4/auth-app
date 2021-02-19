@@ -3,8 +3,8 @@
 namespace app\controller;
 
 use app\traits\TemplateTrait;
-use app\lib\Assets;
-use app\model\RegisterModel;
+use app\lib\Assets; 
+use app\model\RegisterModel; 
 use app\helpers\Transaction;
 use app\lib\LoggerHTML;
 use Exception;
@@ -47,6 +47,7 @@ class RegisterController
         if( isset($_SESSION['user']) ) {
             header('location: /');
         }
+        //var_dump($_SESSION);
 
         $data = new stdClass;
 
@@ -64,7 +65,7 @@ class RegisterController
         }
 
         $_POST = [];
-        session_destroy();
+        //session_destroy();
     }
 
     /**
