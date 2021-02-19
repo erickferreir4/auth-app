@@ -30,6 +30,8 @@ class RegisterController
 
     /**
      *  Add Assets to page
+     *
+     *  @return void
      */
     public function addAssets() : void
     {
@@ -40,6 +42,8 @@ class RegisterController
 
     /**
      *  Verify post data
+     *
+     *  @return void
      */
     public function hasPost() : void
     {
@@ -47,7 +51,6 @@ class RegisterController
         if( isset($_SESSION['user']) ) {
             header('location: /');
         }
-        //var_dump($_SESSION);
 
         $data = new stdClass;
 
@@ -65,12 +68,13 @@ class RegisterController
         }
 
         $_POST = [];
-        //session_destroy();
     }
 
     /**
      *  Authenticate user
+     *
      *  @param {object} $data - data user 
+     *  @return boolean
      */
     private function authUser(stdClass $data) : bool
     {
@@ -98,12 +102,13 @@ class RegisterController
             Transaction::rollback();
             return false;
         }
-        
     }
 
     /**
-     *  User exists
+     *  User exists in database
+     *
      *  @param {string} $email - user email
+     *  @return boolean
      */
     private function userNotExists(string $email) : bool
     {
@@ -111,13 +116,13 @@ class RegisterController
     }
 
     /**
-     *  Save user
+     *  Save user in database
+     *
      *  @param {stdClass} $data - user data
+     *  @return boolean
      */
     private function saveUser( stdClass $data ) : bool
     {
         return self::$model->save($data);
     }
-
-
 }

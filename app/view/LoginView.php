@@ -4,6 +4,7 @@
             <h2>Login</h2>
     
             <form action="/login" method="POST">
+            <p class="<?= $this->user_failed ? 'is--active' : ''?>">Invalid credencials</p>
                 <input type="email" placeholder="Email" name="email" />
                 <input type="password" name="passwd" placeholder="Password" />
     

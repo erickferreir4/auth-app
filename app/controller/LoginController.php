@@ -8,6 +8,7 @@ use app\model\LoginModel;
 use app\helpers\Transaction;
 use app\lib\LoggerHTML;
 use stdClass;
+use Exception;
 
 /**
  *  Login Controller
@@ -16,26 +17,39 @@ class LoginController
 {
     use TemplateTrait;
 
+    private static $model;
+    private $user_failed;
+
     public function __construct()
     {
+        $this->hasPost();
         $this->addAssets();
         $this->setTitle('Login');
         $this->layout('Login');
-        $this->hasPost();
     }
 
-    public function addAssets()
+    /**
+     *  Add assets to page
+     *
+     *  @return void
+     */
+    public function addAssets() : void
     {
         $this->setAssets( new Assets );
         $this->addStyle('login');
     }
-
+    
+    /**
+     *  Has post form
+     *
+     *  @return void
+     */
     public function hasPost() : void
     {
-        //session_start();
-        //if( isset($_SESSION['user']) ) {
-        //    header('location: /');
-        //}
+        session_start();
+        if( isset($_SESSION['user']) ) {
+            header('location: /');
+        }
 
         $data = new stdClass;
 
@@ -46,28 +60,44 @@ class LoginController
                     filter_var($_POST['passwd'], FILTER_SANITIZE_SPECIAL_CHARS) : null;
         
         if( $data->email && $data->passwd ) {
-            $this->authUser($data);
-            //if( $this->authUser($data) ) {
-                //$_SESSION['user'] = $data->email;
-                //header('location: /');
-            //}
+            if( $this->authUser($data) ) {
+                $_SESSION['user'] = $data->email;
+                header('location: /');
+            }
+            else {
+                $this->user_failed = true;
+            }
         }
+
+        $_POST = [];
     }
 
+    /**
+     *  Authenticate user
+     *
+     *  @param {stdClass} $data - object post form
+     *  @return boolean
+     */
     public function authUser(stdClass $data) : bool
     {
         try {
             Transaction::open('database');
             Transaction::setLogger( new LoggerHTML('log.html') );
 
-            $model = new LoginModel;
-            var_dump($model->all());
+            self::$model = new LoginModel;
+            $result = self::$model->find($data->email);
 
+            if( !empty($result) ) {
+                return password_verify($data->passwd, $result->passwd);
+            }
+
+            Transaction::close();
+            return FALSE;
         } catch( Exception $e ) {
             Transaction::log($e->getMessage());
             Transaction::rollback();
         }   
 
-        return true;
+        return FALSE;
     }
 }

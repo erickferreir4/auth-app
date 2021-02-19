@@ -3,8 +3,11 @@
 namespace app\model;
 
 use app\helpers\Transaction;
-use PDO;
+use stdClass;
 
+/**
+ *  Login Model
+ */
 class LoginModel
 {
     private static $conn;
@@ -14,6 +17,11 @@ class LoginModel
         $this->setConnection();
     }
 
+    /**
+     *  Set Connection
+     *
+     *  @return void
+     */
     private function setConnection() : void
     {
         if( empty(self::$conn) ) {
@@ -22,7 +30,12 @@ class LoginModel
         }
     }
 
-    private function createTableUsers()
+    /**
+     *  Create table if not exists
+     *
+     *  @return void
+     */
+    private function createTableUsers() : void
     {
         $sql = 'CREATE TABLE IF NOT EXISTS users
                 (
@@ -39,28 +52,23 @@ class LoginModel
         self::$conn->exec($sql);
     }
 
-    public function all()
-    {
-        $sql = 'SELECT * FROM users';
-
-        $result = self::$conn->query($sql);
-
-        return $result->fetchAll(PDO::FETCH_CLASS, 'stdClass');
-    }
-
-    public function find(string $email)
+    /**
+     *  Find in database
+     *
+     * @param {string} $email - email find in database
+     * @return object result
+     */
+    public function find(string $email) : stdClass
     {
         $sql = 'SELECT * FROM users
                 WHERE
-                    email =: email';
+                    email = :email';
 
-        
         $stmt = self::$conn->prepare($sql);
 
         $stmt->bindValue(':email', $email);
         $stmt->execute();
 
-        return $stmt->fetchAll();
+        return $stmt->fetchObject();
     }
-
 }

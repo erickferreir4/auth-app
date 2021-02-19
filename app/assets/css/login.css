@@ -26,6 +26,14 @@ form {
     flex-direction: column;
 }
 
+form > p {
+    color: red!important;
+    display: none;
+}
+form > p.is--active {
+    display: block;
+}
+
 form input {
     border: 1px solid #BDBDBD;
     border-radius: 8px;
