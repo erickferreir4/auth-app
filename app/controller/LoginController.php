@@ -3,6 +3,7 @@
 namespace app\controller;
 
 use app\traits\TemplateTrait;
+use app\interfaces\IController;
 use app\lib\Assets;
 use app\model\LoginModel;
 use app\helpers\Transaction;
@@ -15,7 +16,7 @@ use Google_Service_Oauth2;
 /**
  *  Login Controller
  */
-class LoginController
+class LoginController implements IController
 {
     use TemplateTrait;
 
@@ -25,7 +26,7 @@ class LoginController
 
     public function __construct()
     {
-        $this->googleAuth();
+        //$this->googleAuth();
         $this->hasPost();
         $this->addAssets();
         $this->setTitle('Login');
@@ -82,7 +83,7 @@ class LoginController
      *  @param {stdClass} $data - object post form
      *  @return boolean
      */
-    public function authUser(stdClass $data) : bool
+    private function authUser($data) : bool
     {
         try {
             Transaction::open('database');
@@ -126,7 +127,9 @@ class LoginController
             $email =  $google_account_info->email;
             $name =  $google_account_info->name;
 
+            echo '<pre>';
             var_dump($google_account_info);
+            //var_dump($email, $name);
             // now you can use this profile info to create account in your website and make user logged in.
         } else {
             $this->googleUrl = $client->createAuthUrl();

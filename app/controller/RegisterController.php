@@ -3,6 +3,7 @@
 namespace app\controller;
 
 use app\traits\TemplateTrait;
+use app\interfaces\IController;
 use app\lib\Assets; 
 use app\model\RegisterModel; 
 use app\helpers\Transaction;
@@ -13,7 +14,7 @@ use stdClass;
 /**
  *  Regsiter Controller
  */
-class RegisterController
+class RegisterController implements IController
 {
     use TemplateTrait;
 
@@ -76,7 +77,7 @@ class RegisterController
      *  @param {object} $data - data user 
      *  @return boolean
      */
-    private function authUser(stdClass $data) : bool
+    public function authUser($data) : bool
     {
         try {
             Transaction::open('database');
