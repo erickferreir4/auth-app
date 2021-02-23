@@ -83,7 +83,7 @@ class LoginController implements IController
      *  @param {stdClass} $data - object post form
      *  @return boolean
      */
-    private function authUser($data) : bool
+    public function authUser($data) : bool
     {
         try {
             Transaction::open('database');
