@@ -17,7 +17,7 @@
             <p>or continue with these social profile</p>
             
             <ul>
-                <li><button><img src="/assets/imgs/Google.svg" /></button></li>
+            <li><a href="<?= $this->googleUrl() ?>"><img src="/assets/imgs/Google.svg" /></a></li>
                 <li><button><img src="/assets/imgs/Facebook.svg" /></button></li>
                 <li><button><img src="/assets/imgs/Twitter.svg" /></button></li>
                 <li><button><img src="/assets/imgs/Github.svg" /></button></li>

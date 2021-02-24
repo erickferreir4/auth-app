@@ -3,6 +3,7 @@
 namespace app\model;
 
 use app\traits\ModelTrait;
+use app\helpers\Transaction;
 
 /**
  *  Login Model
@@ -10,4 +11,26 @@ use app\traits\ModelTrait;
 class LoginModel
 {
     use ModelTrait;
+
+    public function googleSave($data)
+    {
+        if( !empty($this->find($data->email)) ) {
+            return false;
+        }
+
+        $sql = 'INSERT INTO users
+                    (email, username, photo)
+                VALUES
+                    (:email, :username, :photo)';
+
+        $stmt = self::$conn->prepare($sql);
+
+        $stmt->bindValue(':email', $data->email);
+        $stmt->bindValue(':username', $data->username);
+        $stmt->bindValue(':photo', $data->photo);
+
+        Transaction::log($sql);
+
+        return $stmt->execute() ? true : false;
+    }
 }

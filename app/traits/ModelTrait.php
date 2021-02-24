@@ -3,6 +3,7 @@
 namespace app\traits;
 
 use app\helpers\Transaction;
+use PDO;
 
 trait ModelTrait
 {
@@ -37,7 +38,7 @@ trait ModelTrait
                 (
                     id INTEGER PRIMARY KEY,
                     email VARCHAR(250) NOT NULL,
-                    passwd VARCHAR(25) NOT NULL,
+                    passwd VARCHAR(250),
                     photo VARCHAR(250),
                     username VARCHAR(100),
                     bio VARCHAR(750),
