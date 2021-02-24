@@ -11,7 +11,6 @@ use app\helpers\Transaction;
 use app\lib\LoggerHTML;
 use stdClass;
 use Exception;
-use Google_Client;
 use Google_Service_Oauth2;
 
 /**
@@ -65,17 +64,6 @@ class LoginController implements IController
         $data->passwd = isset($_POST['passwd']) ? 
                     filter_var($_POST['passwd'], FILTER_SANITIZE_SPECIAL_CHARS) : null;
         
-        //Transaction::open('database');
-        //Transaction::setLogger( new LoggerHTML('log.html') );
-
-        //self::$model = new LoginModel;
-        //$result = self::$model->all();
-        //echo '<pre>';
-        //var_dump($result);
-
-        //Transaction::close();
-
-
         if( $data->email && $data->passwd ) {
             if( $this->authUser($data) ) {
                 $_SESSION['user'] = $data->email;
@@ -109,7 +97,9 @@ class LoginController implements IController
             }
 
             Transaction::close();
+
             return FALSE;
+
         } catch( Exception $e ) {
             Transaction::log($e->getMessage());
             Transaction::rollback();
@@ -118,7 +108,12 @@ class LoginController implements IController
         return FALSE;
     }
 
-    public function googleAuth()
+    /**
+     *  Authenticate Google
+     *
+     *  @return void
+     */
+    public function googleAuth() : void
     {
         $client = $this->googleClient();
 
@@ -135,7 +130,6 @@ class LoginController implements IController
             $data->email =  $google_account_info->email;
             $data->photo =  $google_account_info->picture;
 
-            //var_dump($data);
             try {
                 Transaction::open('database');
                 Transaction::setLogger( new LoggerHTML('log.html') );

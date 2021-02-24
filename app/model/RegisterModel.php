@@ -2,16 +2,22 @@
 
 namespace app\model;
 
-use app\helpers\Transaction;
 use app\traits\ModelTrait;
-use PDO;
 
-
+/**
+ *  Register Model
+ */
 class RegisterModel
 {
     use ModelTrait;
 
-    public function save($data)
+    /**
+     *  Save user info in db
+     *
+     *  @param {stdClass} $data - user object info
+     *  @return bool
+     */
+    public function save($data) : bool
     {
         $sql = 'INSERT INTO users
                     (email, passwd)

@@ -124,7 +124,7 @@ class RegisterController implements IController
      *  @param {stdClass} $data - user data
      *  @return boolean
      */
-    private function saveUser( stdClass $data ) : bool
+    private function saveUser($data) : bool
     {
         return self::$model->save($data);
     }

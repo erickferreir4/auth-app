@@ -20,6 +20,7 @@ class Transaction
 
     /**
      *  Open connection database
+     *
      *  @param {string} $database - ini file in config
      */
     public static function open(string $database) : void
@@ -32,6 +33,7 @@ class Transaction
 
     /**
      *  Get PDO connection
+     *
      *  @return - PDO connection
      */
     public static function get() : PDO
@@ -64,6 +66,7 @@ class Transaction
 
     /**
      *  Set logger class
+     *
      *  @param {ILogger} $logger - class logger 
      */
     public static function setLogger(ILogger $logger) : void
@@ -73,6 +76,7 @@ class Transaction
     
     /**
      *  Register log 
+     *
      *  @param {string} $message - message to register
      */
     public static function log(string $message) : void

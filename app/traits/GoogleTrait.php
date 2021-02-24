@@ -4,8 +4,16 @@ namespace app\traits;
 
 use Google_Client;
 
+/**
+ *  Google Trait
+ */
 trait GoogleTrait
 {
+    /**
+     *  Set google client
+     *
+     *  @return object result
+     */
     public function googleClient()
     {
         $redirectUri = 'http://' . $_SERVER['HTTP_HOST'] . '/login';
@@ -19,7 +27,13 @@ trait GoogleTrait
 
         return $client;
     }
-    public function googleUrl()
+
+    /**
+     *  Get url google
+     *
+     *  @return string url
+     */
+    public function googleUrl() : string
     {
         return $this->googleClient()->createAuthUrl();
     }

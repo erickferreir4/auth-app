@@ -5,6 +5,9 @@ namespace app\traits;
 use app\helpers\Transaction;
 use PDO;
 
+/**
+ *  Model Trait
+ */
 trait ModelTrait
 {
     private static $conn;
@@ -69,6 +72,11 @@ trait ModelTrait
         return $stmt->fetchObject();
     }
 
+    /**
+     *  Select all in database
+     *
+     *  @return object result
+     */
     public function all()
     {
         $sql = 'SELECT * FROM users';

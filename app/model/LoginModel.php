@@ -12,7 +12,13 @@ class LoginModel
 {
     use ModelTrait;
 
-    public function googleSave($data)
+    /**
+     *  Save google user
+     *
+     *  @param {stdClass} $data - user info
+     *  @return bool
+     */
+    public function googleSave($data) : bool
     {
         if( !empty($this->find($data->email)) ) {
             return false;
