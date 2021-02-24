@@ -17,6 +17,7 @@ trait GoogleTrait
     public function googleClient()
     {
         $redirectUri = 'http://' . $_SERVER['HTTP_HOST'] . '/login';
+        var_dump($redirectUri);
 
         // create Client Request to access Google API
         $client = new Google_Client();
