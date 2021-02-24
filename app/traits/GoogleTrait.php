@@ -16,13 +16,8 @@ trait GoogleTrait
      */
     public function googleClient()
     {
-        $hosts = ['localhost:8082', 'auth.erickferreira'];
-        //var_dump(php_uname());
-        //$redirectUri = 'http://' . $_SERVER['HTTP_HOST'] . '/login';
-        echo '<pre>';
-        var_dump($_SERVER);
-        //$redirectUri = ''.$_SERVER['HTTP_REFERER'] . 'login'.'';
-        //echo $redirectUri;
+        $variables = parse_ini_file(__DIR__ . '/../config/variables.ini');
+        $redirectUri = $variables['host_uri'] . '/login';
 
         // create Client Request to access Google API
         $client = new Google_Client();
