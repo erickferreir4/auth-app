@@ -17,12 +17,6 @@ trait GoogleTrait
     public function googleClient()
     {
         $variables = parse_ini_file(__DIR__ . '/../config/variables.ini');
-        $redirectUri = $variables['host_uri'] . '/login';
-
-        echo '<pre>';
-        var_dump($_SERVER);
-
-
 
         // create Client Request to access Google API
         $client = new Google_Client();

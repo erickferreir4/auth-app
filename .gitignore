@@ -3,7 +3,8 @@
 /app/database/*.db
 /app/tmp/log.*
 /app/tmp/log.*
-/app/config/*
+/app/config/*.ini
+/app/config/*.json
 
 *.deploy
 
