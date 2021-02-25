@@ -18,7 +18,7 @@ trait GoogleTrait
     {
         $variables = parse_ini_file(__DIR__ . '/../config/variables.ini');
 
-        $redirectUri = $variables['host_uri'];
+        $redirectUri = $variables['host_uri'] . '/login';
 
         // create Client Request to access Google API
         $client = new Google_Client();
