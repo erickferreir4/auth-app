@@ -3,7 +3,7 @@
 namespace app\controller;
 
 use app\traits\TemplateTrait;
-use app\traits\GoogleTrait;
+use app\traits\SocialTrait;
 use app\interfaces\IController;
 use app\lib\Assets;
 use app\model\LoginModel;
@@ -19,7 +19,7 @@ use Google_Service_Oauth2;
 class LoginController implements IController
 {
     use TemplateTrait;
-    use GoogleTrait;
+    use SocialTrait;
 
     private static $model;
     private $user_failed;
@@ -27,6 +27,7 @@ class LoginController implements IController
     public function __construct()
     {
         session_start();
+        $this->facebookAuth();
         $this->googleAuth();
         $this->hasPost();
         $this->addAssets();
@@ -115,9 +116,11 @@ class LoginController implements IController
      */
     public function googleAuth() : void
     {
-        $client = $this->googleClient();
+        $path = $_SERVER['REQUEST_URI'];
 
-        if (isset($_GET['code'])) {
+        if (isset($_GET['code']) && strpos($path, 'facebook') === false) {
+
+            $client = $this->googleClient();
             $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
             $client->setAccessToken($token['access_token']);
 
@@ -148,4 +151,25 @@ class LoginController implements IController
             }   
         } 
     }
+
+    public function facebookAuth()
+    {
+        $path = $_SERVER['REQUEST_URI'];
+
+        if( strpos($path, 'facebook') !== false && isset($_GET['code']) ) {
+
+            $client = $this->facebookClient();
+            $helper = $client->getRedirectLoginHelper();
+
+            $accessToken = $helper->getAccessToken();
+
+            $response = $client->get('/me?fields=id,name,email,picture', $accessToken->getValue());
+
+            $user = $response->getGraphUser();
+            var_dump($user);
+
+        }
+    }
+
+
 }

@@ -3,7 +3,7 @@
 namespace app\controller;
 
 use app\traits\TemplateTrait;
-use app\traits\GoogleTrait;
+use app\traits\SocialTrait;
 use app\interfaces\IController;
 use app\lib\Assets; 
 use app\model\RegisterModel; 
@@ -18,7 +18,7 @@ use stdClass;
 class RegisterController implements IController
 {
     use TemplateTrait;
-    use GoogleTrait;
+    use SocialTrait;
 
     private static $model;
     private $userExists;

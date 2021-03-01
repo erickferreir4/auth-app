@@ -7,7 +7,7 @@ use Google_Client;
 /**
  *  Google Trait
  */
-trait GoogleTrait
+trait SocialTrait
 {
     /**
      *  Set google client
@@ -39,4 +39,26 @@ trait GoogleTrait
     {
         return $this->googleClient()->createAuthUrl();
     }
+
+
+    public function facebookClient()
+    {
+        $facebook = parse_ini_file(__DIR__ . '/../config/facebook.ini');
+
+        $fb = new \Facebook\Facebook([
+            'app_id' => $facebook['app_id'],
+            'app_secret' => $facebook['app_secret'],
+        ]);
+
+        return $fb;
+    }
+
+    public function facebookUrl() : string
+    {
+        $helper = $this->facebookClient()->getRedirectLoginHelper();
+        $permissions = ['email']; // Optional permissions
+        $loginUrl = $helper->getLoginUrl('http://localhost:8082/login/auth/facebook/callback', $permissions);
+        return $loginUrl;
+    }
+
 }
