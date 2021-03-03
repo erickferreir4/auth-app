@@ -138,7 +138,7 @@ class LoginController implements IController
                 Transaction::setLogger( new LoggerHTML('log.html') );
 
                 self::$model = new LoginModel;
-                self::$model->googleSave($data);
+                self::$model->socialSave($data);
 
                 Transaction::close();
 
@@ -152,7 +152,12 @@ class LoginController implements IController
         } 
     }
 
-    public function facebookAuth()
+    /**
+     *  Authenticate Facebook
+     *
+     *  @return void
+     */
+    public function facebookAuth() : void
     {
         $path = $_SERVER['REQUEST_URI'];
 
@@ -164,12 +169,30 @@ class LoginController implements IController
             $accessToken = $helper->getAccessToken();
 
             $response = $client->get('/me?fields=id,name,email,picture', $accessToken->getValue());
+            $data = new stdClass;
 
             $user = $response->getGraphUser();
-            var_dump($user);
 
+            $data->username = $user->getName();
+            $data->email = $user->getEmail();
+            $data->photo = $user->getPicture()->getUrl();
+
+            try {
+                Transaction::open('database');
+                Transaction::setLogger( new LoggerHTML('log.html') );
+
+                self::$model = new LoginModel;
+                self::$model->socialSave($data);
+
+                Transaction::close();
+
+                $_SESSION['user'] = $data->email;
+                header('location: /');
+
+            } catch( Exception $e ) {
+                Transaction::log($e->getMessage());
+                Transaction::rollback();
+            }   
         }
     }
-
-
 }

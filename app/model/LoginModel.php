@@ -18,7 +18,7 @@ class LoginModel
      *  @param {stdClass} $data - user info
      *  @return bool
      */
-    public function googleSave($data) : bool
+    public function socialSave($data) : bool
     {
         if( !empty($this->find($data->email)) ) {
             return false;
