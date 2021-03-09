@@ -66,7 +66,12 @@ trait SocialTrait
     {
         $helper = $this->facebookClient()->getRedirectLoginHelper();
         $permissions = ['email']; // Optional permissions
-        $loginUrl = $helper->getLoginUrl('http://localhost:8082/login/auth/facebook/callback', $permissions);
+
+        $variables = parse_ini_file(__DIR__ . '/../config/variables.ini');
+        $redirectUri = $variables['host_uri'] . '/login';
+
+        $loginUrl = $helper->getLoginUrl($redirectUri.'/login/auth/facebook/callback', $permissions);
+
         return $loginUrl;
     }
 
