@@ -40,7 +40,11 @@ trait SocialTrait
         return $this->googleClient()->createAuthUrl();
     }
 
-
+    /**
+     *  Set facebook client
+     *
+     *  @return object result
+     */
     public function facebookClient()
     {
         $facebook = parse_ini_file(__DIR__ . '/../config/facebook.ini');
@@ -53,6 +57,11 @@ trait SocialTrait
         return $fb;
     }
 
+    /**
+     *  Get url google
+     *
+     *  @return string url
+     */
     public function facebookUrl() : string
     {
         $helper = $this->facebookClient()->getRedirectLoginHelper();

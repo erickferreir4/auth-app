@@ -2,6 +2,9 @@
 
 namespace app\interfaces;
 
+/**
+ *  Interface Controller
+ */
 interface IController
 {
     public function addAssets() : void;

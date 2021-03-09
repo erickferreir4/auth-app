@@ -7,8 +7,16 @@ use app\model\AccountModel;
 use app\lib\LoggerHTML;
 use Exception;
 
+/**
+ *  Account Trait
+ */
 trait AccountTrait
 {
+    /**
+     *  Get info by email
+     *
+     *  @param {string} $email - email user
+     */
     private function getInfo(string $email)
     {
         try {

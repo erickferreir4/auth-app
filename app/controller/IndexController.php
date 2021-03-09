@@ -21,6 +21,10 @@ class IndexController
     public function __construct()
     {
         session_start();
+        if( empty($_SESSION['user']) ) {
+            header('location: /login');
+        }
+
         $this->data = $this->getInfo($_SESSION['user']);
 
         $this->addAssets();
@@ -28,6 +32,11 @@ class IndexController
         $this->layout('index');
     }
 
+    /**
+     *  Load assets in page
+     *
+     *  @return void
+     */
     public function addAssets()
     {
         $this->setAssets( new Assets );
@@ -35,7 +44,12 @@ class IndexController
         $this->addScript('index');
     }
 
-    public function personalInfo()
+    /**
+     *  Load template
+     *
+     *  @return string
+     */
+    public function personalInfo() : string
     {
         $info = file_get_contents(__DIR__ . '/../templates/personal_info.html');
 
@@ -43,11 +57,10 @@ class IndexController
         $info = str_replace('[[EMAIL]]', isset($this->data->email) ? $this->data->email : 'empty', $info);
         $info = preg_replace(
             '/src=.*[[PHOTO]].*"/', 
-            isset($this->data->photo) ? 'src='.$this->data->photo : 'src=/assets/imgs/[[PHOTO]].png', $info
+            isset($this->data->photo) ? 'src="'.$this->data->photo.'"' : 'src="/assets/imgs/[[PHOTO]].png"', $info
         );
         $info = str_replace('[[BIO]]', isset($this->data->bio) ? $this->data->bio : 'empty', $info);
-        $info = str_replace('[[PHONE]]', isset($this->data->phone) ? $this->data->bio : 'empty', $info);
-        $info = str_replace('[[PASSWORD]]', isset($this->data->passwd) ? $this->data->passwd : 'empty', $info);
+        $info = str_replace('[[PHONE]]', isset($this->data->phone) ? $this->data->phone : 'empty', $info);
 
         return $info;
     }

@@ -1,0 +1,45 @@
+<span>
+    <img id="userimg" src="/assets/imgs/[[PHOTO]].png" />
+    <button onclick="document.querySelector('#getFile').click()">CHANGE PHOTO</button>
+</span>
+
+<form enctype="multipart/form-data" action="/edit/save" method="POST">
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Enter your name..." value="[[NAME]]" required/>
+
+    <label>Bio</label>
+    <textarea name="bio" rows="5" cols="50" placeholder="Enter your bio..." value="[[BIO]]" required>[[BIO]]</textarea>
+
+    <label>Phone</label>
+    <input type="text" name="phone" placeholder="Enter your phone..." value="[[PHONE]]" required/>
+
+    <label>Email</label>
+    <input type="text" name="email" required placeholder="Enter your email..." value="[[EMAIL]]" required/>
+
+    <label>Password</label>
+    <input type="text" name="passwd" placeholder="Enter your password or new password..." required/>
+    <input type="file" name="userfile" id="getFile" style="display: none;"/>
+    <input type="hidden" name="old-userfile" value='[[OLD_FILE]]'/>
+
+    <button type="submit">Save</button>
+</form>
+
+
+
+
+<script>
+
+    let userfile = document.querySelector('#getFile')
+
+    let listener = (ev) => {
+        let fReader = new FileReader();
+        fReader.readAsDataURL(ev.target.files[0]);
+        fReader.onloadend = function(event){
+            var img = document.getElementById("userimg");
+            img.src = event.target.result;
+        }
+    }
+
+    userfile.addEventListener('change', listener, false)
+
+</script>

@@ -6,8 +6,14 @@ file: client_google.json
     export file from google console in google api => auth
 ```
 
+## Create file facebook auth
+file: facebook.ini
+```
+    app_id = 'key'
+    app_secret = 'secret_key'
+```
 
-### Create file database
+## Create file database
 
 file: database.ini
 
@@ -20,8 +26,7 @@ type    =   'type_db'
 
 ```
 
-
-### Create file variables to env
+## Create file variables to env
 
 file: variables.ini
 

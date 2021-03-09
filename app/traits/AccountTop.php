@@ -23,7 +23,7 @@ trait AccountTop
 
         $top = preg_replace(
             '/src=.*[[PHOTO]].*"/', 
-            isset($this->data->photo) ? 'src='.$this->data->photo : 'src=/assets/imgs/[[PHOTO]].png', $top
+            isset($this->data->photo) ? 'src="'.$this->data->photo.'"' : 'src=/assets/imgs/[[PHOTO]].png', $top
         );
 
         return $top;
