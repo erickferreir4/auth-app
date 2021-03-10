@@ -17,6 +17,11 @@ RUN echo 'Order allow,deny' >> /etc/apache2/apache2.conf
 RUN echo 'Deny from all' >> /etc/apache2/apache2.conf
 RUN echo '</Files>' >> /etc/apache2/apache2.conf
 
+RUN echo '<Files ~ "\.json$">' >> /etc/apache2/apache2.conf
+RUN echo 'Order allow,deny' >> /etc/apache2/apache2.conf
+RUN echo 'Deny from all' >> /etc/apache2/apache2.conf
+RUN echo '</Files>' >> /etc/apache2/apache2.conf
+
 # allow access
 RUN echo '<Files "index.php">' >> /etc/apache2/apache2.conf
 RUN echo 'allow from all' >> /etc/apache2/apache2.conf
